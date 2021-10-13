@@ -1,6 +1,7 @@
 ﻿using Autodesk.Revit.DB;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,7 +15,8 @@ namespace AlexaToRevit
         {
             // Revit model object.
             RevitModel model = new RevitModel();
-            CsvAlexaResponse csv = new CsvAlexaResponse(@"C:\Alexa\AlexaRead.csv"); // databaase file path
+            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            CsvAlexaResponse csv = new CsvAlexaResponse(Path.Combine(path,"test.csv")); // databaase file path
             // Collect wall the walls
             List<Wall> walls = model.GetWalls(doc);           
             List<FamilyInstance> specialtyEquipment = model.GetFamilyInstance(doc, BuiltInCategory.OST_SpecialityEquipment);

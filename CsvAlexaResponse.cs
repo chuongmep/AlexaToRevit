@@ -1,9 +1,11 @@
 ﻿using CsvHelper;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CsvHelper.Configuration;
 
 namespace AlexaToRevit
 {
@@ -33,7 +35,7 @@ namespace AlexaToRevit
                     using (var tr = new System.IO.StreamReader(fs))
                     {
                         // Read csv file. 
-                        CsvHelper.CsvReader csvR = new CsvHelper.CsvReader(tr);
+                        CsvHelper.CsvReader csvR = new CsvHelper.CsvReader(tr,CultureInfo.CurrentCulture);
 
                         try
                         {
@@ -62,7 +64,7 @@ namespace AlexaToRevit
                 // Read stream as write. 
                 using (var sw = new System.IO.StreamWriter(fs))
                 {
-                    CsvWriter csvW = new CsvWriter(sw);
+                    CsvWriter csvW = new CsvWriter(sw,new CsvConfiguration(CultureInfo.CurrentCulture));
                     // write updated records to database csv
                     csvW.WriteRecords(records);
                     sw.Dispose();
